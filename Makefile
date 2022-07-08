@@ -9,16 +9,13 @@
 # Adjust these when making new releases
 
 JDIS_MAJOR = 1
-JDIS_MINOR = 2
+JDIS_MINOR = 3
 JDIS_MICRO = 0
 
 # Compiler/linker flags
 PIC_FLAGS = -fPIC
 
 CDEFS ?=
-CPPFLAGS ?=
-CFLAGS ?=
-LDFLAGS ?=
 
 CDEFS += -DJDIS_MAJOR=$(JDIS_MAJOR) \
 	-DJDIS_MINOR=$(JDIS_MINOR) \
@@ -28,6 +25,9 @@ CPPFLAGS += $(CDEFS)
 
 CFLAGS += $(PIC_FLAGS)
 LDFLAGS += $(PIC_FLAGS)
+
+# Disable deterministic mode to get correct incremental archive builds
+ARFLAGS = rvU
 
 # Define the JRISC static library
 JRISC_CORE_OBJECTS = jrisc_ctx.o jrisc_inst.o
